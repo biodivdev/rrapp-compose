@@ -1,0 +1,63 @@
+proxy:
+  image: diogok/proxy-docker
+  container_name: "proxy"
+  environment:
+    ROOT_APP: "ui"
+  ports:
+    - "80:80"
+  volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock:ro"
+biodivui:
+  image: diogok/biodiv-ui
+  container_name: "ui"
+  environment:
+    BASE: "/ui"
+  links:
+    - elasticsearch:elasticsearch
+  ports:
+    - 80
+biodividx:
+  image: diogok/biodiv-idx
+  container_name: "idx"
+  links:
+    - elasticsearch:elasticsearch
+    - taxadata:taxadata
+    - dwcbot:dwcbot
+    - dwcservices:dwcservices
+taxadata:
+  image: diogok/taxadata
+  container_name: "taxadata"
+  ports:
+    - 80
+dwcservices:
+  image: diogok/dwc-services
+  container_name: "dwc-services"
+  environment:
+    PROXY: "/dwc-services"
+  ports:
+    - 80
+dwcbot:
+  image: diogok/dwc-bot
+  container_name: "dwc-bot"
+  environment:
+    PROXY: "/dwc-bot"
+  ports:
+    - 8383
+  volumes:
+    - /var/data/dwc-bot:/var/data/dwc-bot:rw
+elasticsearch:
+  image: diogok/elasticsearch
+  container_name: "elasticsearch"
+  ports:
+    - 9200
+  volumes:
+    - /var/data/dwc-elasticsearch/data:/usr/share/elasticsearch/data:rw
+kibana:
+  image: diogok/kibana
+  container_name: "kibana"
+  environment:
+    BASE: "/kibana"
+  ports:
+    - 8001
+  links:
+    - elasticsearch:elasticsearch
