@@ -8,6 +8,8 @@ Docker compose to combine:
 - [biodiv-idx](http://github.com/diogok/biodiv-idx)
 - [biodiv-ui](http://github.com/diogok/biodiv-ui)
 
+[View it live](http://159.203.76.187/).
+
 # License
 
 MIT
