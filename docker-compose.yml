@@ -56,7 +56,7 @@ kibana:
   image: diogok/kibana
   container_name: "kibana"
   environment:
-    BASE: "/kibana"
+    BASE: "kibana"
   ports:
     - 8001
   links:
