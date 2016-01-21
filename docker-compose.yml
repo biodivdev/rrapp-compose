@@ -52,12 +52,3 @@ elasticsearch:
     - 9200
   volumes:
     - /var/data/dwc-elasticsearch/data:/usr/share/elasticsearch/data:rw
-kibana:
-  image: diogok/kibana
-  container_name: "kibana"
-  environment:
-    BASE: "kibana"
-  ports:
-    - 8001
-  links:
-    - elasticsearch:elasticsearch
