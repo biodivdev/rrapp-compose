@@ -1,54 +1,65 @@
-proxy:
-  image: diogok/proxy-docker
-  container_name: "proxy"
-  net: "biodiv"
-  environment:
-    ROOT_APP: "ui"
-  ports:
-    - "80:80"
-  volumes:
-    - "/var/run/docker.sock:/var/run/docker.sock:ro"
-biodivui:
-  image: diogok/biodiv-ui
-  container_name: "ui"
-  net: "biodiv"
-  environment:
-    BASE: "/ui"
-  ports:
-    - 80
-biodividx:
-  image: diogok/biodiv-idx
-  container_name: "idx"
-  net: "biodiv"
-taxadata:
-  image: diogok/taxadata
-  container_name: "taxadata"
-  net: "biodiv"
-  ports:
-    - 80
-dwcservices:
-  image: diogok/dwc-services
-  container_name: "dwc-services"
-  net: "biodiv"
-  environment:
-    PROXY: "/dwc-services"
-  ports:
-    - 80
-dwcbot:
-  image: diogok/dwc-bot
-  container_name: "dwc-bot"
-  net: "biodiv"
-  environment:
-    PROXY: "/dwc-bot"
-  ports:
-    - 8383
-  volumes:
-    - /var/data/dwc-bot:/var/data/dwc-bot:rw
-elasticsearch:
-  image: diogok/elasticsearch
-  container_name: "elasticsearch"
-  net: "biodiv"
-  ports:
-    - 9200
-  volumes:
-    - /var/data/dwc-elasticsearch/data:/usr/share/elasticsearch/data:rw
+version: "2"
+services:
+  proxy:
+    image: diogok/proxy-docker
+    container_name: "proxy"
+    networks:
+      - biodiv
+    environment:
+      ROOT_APP: "ui"
+    ports:
+      - "80:80"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  biodivui:
+    image: diogok/biodiv-ui
+    container_name: "ui"
+    networks:
+      - biodiv
+    environment:
+      BASE: "/ui"
+    ports:
+      - 80
+  biodividx:
+    image: diogok/biodiv-idx
+    container_name: "idx"
+    networks:
+      - biodiv
+  taxadata:
+    image: diogok/taxadata
+    container_name: "taxadata"
+    networks:
+      - biodiv
+    ports:
+      - 80
+  dwcservices:
+    image: diogok/dwc-services
+    container_name: "dwcservices"
+    networks:
+      - biodiv
+    environment:
+      PROXY: "/dwcservices"
+    ports:
+      - 80
+  dwcbot:
+    image: diogok/dwc-bot
+    container_name: "dwcbot"
+    networks:
+      - biodiv
+    environment:
+      PROXY: "/dwcbot"
+    ports:
+      - 8383
+    volumes:
+      - /var/data/dwc-bot:/var/data/dwc-bot:rw
+  elasticsearch:
+    image: diogok/elasticsearch
+    container_name: "elasticsearch"
+    networks:
+      - biodiv
+    ports:
+      - 9200
+    volumes:
+      - /var/data/dwc-elasticsearch/data:/usr/share/elasticsearch/data:rw
+networks:
+  biodiv:
