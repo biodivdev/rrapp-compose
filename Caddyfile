@@ -2,7 +2,9 @@ import  /etc/biodiv/Caddyfile
 
 gzip
 
-proxy / biodivui {
+redir {scheme}://{host}/ /ui 307
+
+proxy /ui biodivui {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
@@ -31,4 +33,5 @@ proxy /elasticsearch elasticsearch:9200 {
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
 }
+
 
