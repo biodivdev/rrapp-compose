@@ -8,30 +8,35 @@ proxy /ui biodivui {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
+  without /ui
 }
 
 proxy /taxadata taxadata {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
+  without /taxadata
 }
 
 proxy /dwc-services dwcservices {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
+  without /dwc-services
 }
 
-proxy /dwcbot dwcbot {
+proxy /dwc-bot dwcbot {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
+  without /dwc-bot
 }
 
 proxy /elasticsearch elasticsearch:9200 {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
+  without /elasticsearch
 }
 
 
