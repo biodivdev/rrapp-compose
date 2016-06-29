@@ -39,6 +39,8 @@ services:
       PROXY: "/dwcbot"
     volumes:
       - /var/data/dwc-bot:/var/data/dwc-bot:rw
+    networks:
+      - biodiv
   dwcservices:
     image: diogok/dwc-services
     networks:
