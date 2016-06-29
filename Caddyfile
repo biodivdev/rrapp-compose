@@ -22,7 +22,7 @@ proxy /dwc-services dwcservices {
   proxy_header X-Forwarded-Proto {scheme}
 }
 
-proxy /dwcbot dwcbot:8383 {
+proxy /dwcbot dwcbot {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
