@@ -10,7 +10,7 @@ services:
       - ./config:/etc/biodiv
       - /opt/caddy:/root/.caddy
     networks:
-      - kbot
+      - biodiv
   biodivui:
     image: diogok/biodiv-ui
     volumes:
