@@ -36,7 +36,7 @@ services:
     volumes:
       - ./config:/etc/biodiv
     environment:
-      PROXY: "/dwcbot"
+      PROXY: "/dwc-bot"
     volumes:
       - /var/data/dwc-bot:/var/data/dwc-bot:rw
     networks:
@@ -45,6 +45,8 @@ services:
     image: diogok/dwc-services
     networks:
       - biodiv
+    environment:
+      PROXY: "/dwc-services"
   elasticsearch:
     image: diogok/elasticsearch
     networks:
