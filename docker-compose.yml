@@ -17,8 +17,6 @@ services:
       - ./config:/etc/biodiv
     networks:
       - biodiv
-    environment:
-      BASE: "/ui"
   biodividx:
     image: diogok/biodiv-idx
     volumes:
