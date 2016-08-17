@@ -31,7 +31,7 @@
   window.onload=function() {
     for(var cc in data) {
       var name = data[cc];
-      var link = "https://"+cc+".biodiversity.space";
+      var link = "https://"+cc+".biodiversity.cloud";
       superagent
         .get(link+"/stats.json")
         .end(function(err,res){
