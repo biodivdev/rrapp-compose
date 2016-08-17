@@ -31,9 +31,13 @@ services:
       - biodiv
   ipt:
     image: diogok/ipt
+    ports:
+      - 8080:80
     networks:
       - biodiv
-  dwcbot:
+    volumes:
+      - /var/data/ipt:/var/data/ipt
+    dwcbot:
     image: diogok/dwc-bot
     volumes:
       - ./config:/etc/biodiv
