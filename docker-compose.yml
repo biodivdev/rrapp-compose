@@ -37,7 +37,7 @@ services:
       - biodiv
     volumes:
       - /var/data/ipt:/var/data/ipt
-    dwcbot:
+  dwcbot:
     image: diogok/dwc-bot
     volumes:
       - ./config:/etc/biodiv
