@@ -29,6 +29,10 @@ services:
       - ./config:/etc/biodiv
     networks:
       - biodiv
+  ipt:
+    image: diogok/ipt
+    networks:
+      - biodiv
   dwcbot:
     image: diogok/dwc-bot
     volumes:

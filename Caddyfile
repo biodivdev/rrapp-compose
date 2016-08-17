@@ -30,6 +30,12 @@ proxy /elasticsearch elasticsearch:9200 {
   without /elasticsearch
 }
 
+proxy /ipt ipt {
+  proxy_header Host {host}
+  proxy_header X-Real-IP {remote}
+  proxy_header X-Forwarded-Proto {scheme}
+}
+
 proxy / biodivui {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
