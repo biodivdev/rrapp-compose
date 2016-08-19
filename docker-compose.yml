@@ -37,6 +37,12 @@ services:
       - biodiv
     volumes:
       - /var/data/ipt:/var/data/ipt
+  fakeipt:
+    image: diogok/lilipt
+    networks:
+      - biodiv
+    volumes:
+      - /var/data/lilipt:/var/www/html/data
   dwcbot:
     image: diogok/dwc-bot
     volumes:

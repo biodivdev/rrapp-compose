@@ -36,6 +36,12 @@ proxy /ipt ipt {
   proxy_header X-Forwarded-Proto {scheme}
 }
 
+proxy /fakeipt fakeipt {
+  proxy_header Host {host}
+  proxy_header X-Real-IP {remote}
+  proxy_header X-Forwarded-Proto {scheme}
+}
+
 proxy / biodivui {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
