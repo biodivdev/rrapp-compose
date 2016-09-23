@@ -36,11 +36,11 @@ services:
       - ./config:/etc/biodiv
   dwcservices:
     image: diogok/dwc-services
-    environment:
-      PROXY: "/dwc-services"
   elasticsearch:
     image: diogok/elasticsearch
     volumes:
       - /var/data/dwc-elasticsearch/data:/usr/share/elasticsearch/data:rw
   kibana:
     image: diogok/kibana
+    environment:
+      BASE: kibana

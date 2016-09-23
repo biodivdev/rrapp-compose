@@ -2,11 +2,11 @@ import  /etc/biodiv/Caddyfile
 
 gzip
 
-proxy /dwc-services dwcservices {
+proxy /kibana kibana {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
-  without /dwc-services
+  without /kibana
 }
 
 proxy /elasticsearch elasticsearch:9200 {
