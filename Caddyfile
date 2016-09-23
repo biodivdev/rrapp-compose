@@ -1,7 +1,24 @@
+import  /etc/biodiv/Caddyfile
 
-https://biodiversity.cloud
-tls diogo@diogok.net
 gzip
-root /var/www/html
-ext .html
+
+proxy /kibana kibana:8001 {
+  proxy_header Host {host}
+  proxy_header X-Real-IP {remote}
+  proxy_header X-Forwarded-Proto {scheme}
+  without /kibana
+}
+
+proxy /elasticsearch elasticsearch:9200 {
+  proxy_header Host {host}
+  proxy_header X-Real-IP {remote}
+  proxy_header X-Forwarded-Proto {scheme}
+  without /elasticsearch
+}
+
+proxy / biodivui {
+  proxy_header Host {host}
+  proxy_header X-Real-IP {remote}
+  proxy_header X-Forwarded-Proto {scheme}
+}
 
