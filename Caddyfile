@@ -2,7 +2,7 @@ import  /etc/biodiv/Caddyfile
 
 gzip
 
-proxy /kibana kibana {
+proxy /kibana kibana:8001 {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
