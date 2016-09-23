@@ -11,20 +11,26 @@ services:
       - /opt/caddy:/root/.caddy
   biodivui:
     image: diogok/biodiv-ui
+    environment:
+      INDEX: dwc
+      ELASTICSEARCH: http://elasticsearch:9200
   biodividx:
     image: diogok/biodiv-idx
     environment:
+      INDEX: dwc
       ELASTICSEARCH: http://elasticsearch:9200
       DWC_SERVICES: http://dwcservices/api/v1
   taxadata:
     image: diogok/taxa-bot
     environment:
+      INDEX: dwc
       ELASTICSEARCH: http://elasticsearch:9200
     volumes:
       - ./config:/etc/biodiv
   dwcbot:
     image: diogok/dwc-bot-es
     environment:
+      INDEX: dwc
       ELASTICSEARCH: http://elasticsearch:9200
     volumes:
       - ./config:/etc/biodiv
