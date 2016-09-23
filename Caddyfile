@@ -2,13 +2,6 @@ import  /etc/biodiv/Caddyfile
 
 gzip
 
-proxy /taxadata taxadata {
-  proxy_header Host {host}
-  proxy_header X-Real-IP {remote}
-  proxy_header X-Forwarded-Proto {scheme}
-  without /taxadata
-}
-
 proxy /dwc-services dwcservices {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
@@ -16,30 +9,11 @@ proxy /dwc-services dwcservices {
   without /dwc-services
 }
 
-proxy /dwc-bot dwcbot {
-  proxy_header Host {host}
-  proxy_header X-Real-IP {remote}
-  proxy_header X-Forwarded-Proto {scheme}
-  without /dwc-bot
-}
-
 proxy /elasticsearch elasticsearch:9200 {
   proxy_header Host {host}
   proxy_header X-Real-IP {remote}
   proxy_header X-Forwarded-Proto {scheme}
   without /elasticsearch
-}
-
-proxy /ipt ipt {
-  proxy_header Host {host}
-  proxy_header X-Real-IP {remote}
-  proxy_header X-Forwarded-Proto {scheme}
-}
-
-proxy /fakeipt fakeipt {
-  proxy_header Host {host}
-  proxy_header X-Real-IP {remote}
-  proxy_header X-Forwarded-Proto {scheme}
 }
 
 proxy / biodivui {

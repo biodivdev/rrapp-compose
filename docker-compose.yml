@@ -9,61 +9,32 @@ services:
       - ./Caddyfile:/etc/Caddyfile
       - ./config:/etc/biodiv
       - /opt/caddy:/root/.caddy
-    networks:
-      - biodiv
   biodivui:
     image: diogok/biodiv-ui
-    volumes:
-      - ./config:/etc/biodiv
-    networks:
-      - biodiv
   biodividx:
     image: diogok/biodiv-idx
-    volumes:
-      - ./config:/etc/biodiv
-    networks:
-      - biodiv
-  taxadata:
-    image: diogok/taxadata
-    volumes:
-      - ./config:/etc/biodiv
-    networks:
-      - biodiv
-  ipt:
-    image: diogok/ipt
-    ports:
-      - 8080:80
-    networks:
-      - biodiv
-    volumes:
-      - /var/data/ipt:/var/data/ipt
-  fakeipt:
-    image: diogok/lilipt
-    networks:
-      - biodiv
-    volumes:
-      - /var/data/lilipt:/var/www/html/data
-  dwcbot:
-    image: diogok/dwc-bot
-    volumes:
-      - ./config:/etc/biodiv
     environment:
-      PROXY: "/dwc-bot"
+      ELASTICSEARCH: http://elasticsearch:9200
+      DWC_SERVICES: http://dwcservices/api/v1
+  taxadata:
+    image: diogok/taxa-bot
+    environment:
+      ELASTICSEARCH: http://elasticsearch:9200
     volumes:
-      - /var/data/dwc-bot:/var/data/dwc-bot:rw
-    networks:
-      - biodiv
+      - ./config:/etc/biodiv
+  dwcbot:
+    image: diogok/dwc-bot-es
+    environment:
+      ELASTICSEARCH: http://elasticsearch:9200
+    volumes:
+      - ./config:/etc/biodiv
   dwcservices:
     image: diogok/dwc-services
-    networks:
-      - biodiv
     environment:
       PROXY: "/dwc-services"
   elasticsearch:
     image: diogok/elasticsearch
-    networks:
-      - biodiv
     volumes:
       - /var/data/dwc-elasticsearch/data:/usr/share/elasticsearch/data:rw
-networks:
-  biodiv:
+  kibana:
+    image: diogok/kibana
