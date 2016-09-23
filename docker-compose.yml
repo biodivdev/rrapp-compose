@@ -20,7 +20,7 @@ services:
       INDEX: dwc
       ELASTICSEARCH: http://elasticsearch:9200
       DWC_SERVICES: http://dwcservices/api/v1
-  taxadata:
+  taxabot:
     image: diogok/taxa-bot
     environment:
       INDEX: dwc
