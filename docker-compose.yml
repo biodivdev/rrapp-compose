@@ -20,13 +20,6 @@ services:
       INDEX: dwc
       ELASTICSEARCH: http://elasticsearch:9200
       DWC_SERVICES: http://dwcservices/api/v1
-  taxabot:
-    image: diogok/taxa-bot
-    environment:
-      INDEX: dwc
-      ELASTICSEARCH: http://elasticsearch:9200
-    volumes:
-      - ./config:/etc/biodiv
   dwcbot:
     image: diogok/dwc-bot-es
     environment:
