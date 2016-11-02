@@ -27,8 +27,6 @@ services:
       ELASTICSEARCH: http://elasticsearch:9200
     volumes:
       - ./config:/etc/biodiv
-  dwcservices:
-    image: diogok/dwc-services
   elasticsearch:
     image: diogok/elasticsearch
     volumes:
