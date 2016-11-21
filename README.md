@@ -22,18 +22,21 @@ Clone the repository and get the specific branch:
 
   $ git clone https://github.com/diogok/biodiv-compose
   $ cd biodiv-compose
-  $ git fetch 
-  $ git checkout br
 
-And execute the apps:
+For latest elasticsearch you might need to configure the machine with the following:
+
+  $ sudo sysctl -w vm.max\_map\_count=262144
+
+It is important to change the server config at config/Caddyfile (not the root Caddyfile, the one in the config dir), and make the domain line properly, such as http://localhost if it is not running in a domain or inteded to run at another port. The correponding exposed port at docker-compose.yml might also need to be changed.
+
+Finally execute the apps:
 
   $ docker-compose up -d
 
 It will take a while the first time as it download needed images.
 
-It is important to change the server config at config/Caddyfile (not the root Caddyfile, the one in the config dir), and make the domain line properly, such as http://localhost if it is not running in a domain.
 
-The easiest way to customize and run in your data is to change the values in the config files. At config/dwc-bot.list it will list IPTs where to consume the occurrence data from. And at config/taxadata.ini the list of resources to load taxonomy from.
+The easiest way to customize and run in your data is to change the values in the config files. At config/dwc-bot.list it will list IPTs where to consume the occurrence data from.
 
 # License
 
