@@ -12,19 +12,18 @@ services:
   biodivui:
     image: diogok/biodiv-ui
     environment:
-      INDEX: dwc
-      ELASTICSEARCH: http://elasticsearch:9200
+      INDEX: ${INDEX}
+      ELASTICSEARCH: ${ELASTICSEARCH}
   biodividx:
     image: diogok/biodiv-idx
     environment:
-      INDEX: dwc
-      ELASTICSEARCH: http://elasticsearch:9200
-      DWC_SERVICES: http://dwcservices/api/v1
+      INDEX: ${INDEX}
+      ELASTICSEARCH: ${ELASTICSEARCH}
   dwcbot:
     image: diogok/dwc-bot-es
     environment:
-      INDEX: dwc
-      ELASTICSEARCH: http://elasticsearch:9200
+      INDEX: ${INDEX}
+      ELASTICSEARCH: ${ELASTICSEARCH}
     volumes:
       - ./config:/etc/biodiv
   elasticsearch:
