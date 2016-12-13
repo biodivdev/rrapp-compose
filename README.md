@@ -2,42 +2,66 @@
 
 This proxies and consolidates other Rapid Automated Biodiversity Risk Assessments intallations.
 
-[View it live](http://br.biodiversity.cloud/).
+[View it live](https://br.biodiversity.cloud/).
 
-Runing apps:
+Runing individual apps:
 
-- [taxa-bot](http://github.com/diogok/taxa-bot)
-- [dwc-bot-es](http://github.com/diogok/dwc-bot-es)
-- [dwc-services](http://github.com/diogok/dwc-services)
-- [biodiv-idx](http://github.com/diogok/biodiv-idx)
-- [biodiv-ui](http://github.com/diogok/biodiv-ui)
+- [dwc-bot-es](https://github.com/biodivdev/dwc-bot-es)
+- [rrapp-idx](https://github.com/biodivdev/rrapp-idx)
+- [rrapp-ui](https://github.com/biodivdev/rrapp-ui)
 
-# How to run
+## How to run
+
+### Required data
+
+It is important that you have:
+
+- A published checklist in IPT
+- Published occurrences in one or many IPTs
+
+### Preparing
 
 You will need at least 4GB of RAM and it is recommended 50GB of disk and 4 cores, but it varies with the data to load.
 
-Install Git, [Docker](https://docs.docker.com/v1.8/installation/ubuntulinux/) and [docker-compose](https://docs.docker.com/compose/install/).
+Install Git, and latest [Docker](https://docs.docker.com/engine/installation/linux/) and [docker-compose](https://docs.docker.com/compose/install/).
 
-Clone the repository and get the specific branch: 
+Clone the repository: 
 
-  $ git clone https://github.com/diogok/biodiv-compose
-  $ cd biodiv-compose
+  $ git clone https://github.com/biodivdev/rrapp-compose
+  $ cd rrapp-compose
 
 For latest elasticsearch you might need to configure the machine with the following:
 
   $ sudo sysctl -w vm.max\_map\_count=262144
 
-It is important to change the server config at config/Caddyfile (not the root Caddyfile, the one in the config dir). Erase both lines and write the domain line properly, such as http://localhost if it is not running in a domain or inteded to run at another port. The correponding exposed port at docker-compose.yml might also need to be changed. You can also change .env file TAXON\_RESOURCE parameter to the name of the ipt resource from which to pull the taxonomy from.
+### Configuration and Customization
 
-Finally execute the apps:
+By default it will bind to port 8080, it can be changed at config/Caddyfile (not the Caddyfile at root, the one at config directory), you can also add a domain and automatic HTTPS, see [caddy documentation](https://caddyserver.com) for other options.
+
+The file config/dwc-bot.list is a list of IPT's where to get the data from.
+
+The file config/config.ini is the configuration of all apps:
+
+- ELASTICSEARCH=http://elasticsearch:9200 tells which elasticsearch to use
+- INDEX=dwc Tells which index to use on the elasticsearch
+- LOOP=true Tells for the bot and the index to keep runing timely (auto-update the data)
+- SOURCE=lista\_flora\_do\_brasil Tells the name of the resource to use as taxonomic backbone
+
+### Running
+
+Download the images of the apps (important to keep up-to-date):
+
+  $ docker-compose pull
+
+Start them all:
 
   $ docker-compose up -d
 
-It will take a while the first time as it download needed images.
+They will start in background. You can follow the logs with:
 
-The easiest way to customize and run in your data is to change the values in the config files. At config/dwc-bot.list it will list where to consume the occurrence data from.
+  $ docker-compose logs
 
-# License
+## License
 
 MIT
 

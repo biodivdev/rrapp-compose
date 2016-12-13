@@ -4,26 +4,22 @@ services:
     image: diogok/caddy
     ports:
       - 80:80
+      - 8080:8080
       - 443:443
     volumes:
       - ./Caddyfile:/etc/Caddyfile
-      - ./config:/etc/biodiv
       - /opt/caddy:/root/.caddy
-  biodivui:
-    image: diogok/biodiv-ui
-    environment:
-      INDEX: ${INDEX}
-      ELASTICSEARCH: ${ELASTICSEARCH}
-  biodividx:
-    image: diogok/biodiv-idx
-    environment:
-      INDEX: ${INDEX}
-      ELASTICSEARCH: ${ELASTICSEARCH}
-  dwcbot:
+      - ./config:/etc/biodiv
+  ui:
+    image: diogok/rrapp-ui
+    volumes:
+      - ./config:/etc/biodiv
+  idx:
+    image: diogok/rrapp-idx
+    volumes:
+      - ./config:/etc/biodiv
+  bot:
     image: diogok/dwc-bot-es
-    environment:
-      INDEX: ${INDEX}
-      ELASTICSEARCH: ${ELASTICSEARCH}
     volumes:
       - ./config:/etc/biodiv
   elasticsearch:
