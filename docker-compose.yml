@@ -24,6 +24,8 @@ services:
       - ./config:/etc/biodiv
   elasticsearch:
     image: diogok/elasticsearch
+    environment:
+      ES_JAVA_OPTS: -Xmx4g -Xms4g
     volumes:
       - /var/data/dwc-elasticsearch/data:/usr/share/elasticsearch/data:rw
   kibana:
