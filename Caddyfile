@@ -3,22 +3,22 @@ import  /etc/biodiv/Caddyfile
 gzip
 
 proxy /kibana kibana:8001 {
-  proxy_header Host {host}
-  proxy_header X-Real-IP {remote}
-  proxy_header X-Forwarded-Proto {scheme}
+  header_upstream Host {host}
+  header_upstream X-Real-IP {remote}
+  header_upstream X-Forwarded-Proto {scheme}
   without /kibana
 }
 
 proxy /elasticsearch elasticsearch:9200 {
-  proxy_header Host {host}
-  proxy_header X-Real-IP {remote}
-  proxy_header X-Forwarded-Proto {scheme}
+  header_upstream Host {host}
+  header_upstream X-Real-IP {remote}
+  header_upstream X-Forwarded-Proto {scheme}
   without /elasticsearch
 }
 
 proxy / ui {
-  proxy_header Host {host}
-  proxy_header X-Real-IP {remote}
-  proxy_header X-Forwarded-Proto {scheme}
+  header_upstream Host {host}
+  header_upstream X-Real-IP {remote}
+  header_upstream X-Forwarded-Proto {scheme}
 }
 
